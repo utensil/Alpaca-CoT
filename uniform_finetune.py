@@ -340,6 +340,7 @@ if __name__ == "__main__":
     parser.add_argument('--lora_target_modules', nargs='+', 
                         help="the module to be injected, e.g. q_proj/v_proj/k_proj/o_proj for llama, query_key_value for bloom&GLM", 
                         default=["q_proj", "v_proj"])
+    parser.add_argument('--report-to', default=None, type=str)
 
     args = parser.parse_args()
     print(args)
