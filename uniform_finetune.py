@@ -9,7 +9,6 @@ from dataclasses import dataclass, field
 from datasets import load_dataset
 import transformers
 from collections import namedtuple
-from typing import Union, NoneType
 
 assert (
     "LlamaTokenizer" in transformers._import_structure["models.llama"]
@@ -342,7 +341,7 @@ if __name__ == "__main__":
     parser.add_argument('--lora_target_modules', nargs='+', 
                         help="the module to be injected, e.g. q_proj/v_proj/k_proj/o_proj for llama, query_key_value for bloom&GLM", 
                         default=["q_proj", "v_proj"])
-    parser.add_argument('--resume_from_checkpoint', type=Union[bool, str, NoneType], help='resume from the last or the specified checkpoint')
+    parser.add_argument('--resume_from_checkpoint', type=str, help='resume from the specified checkpoint')
 
     args, unknown = parser.parse_known_args()
     print(args)
