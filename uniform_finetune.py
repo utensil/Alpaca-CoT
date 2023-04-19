@@ -299,8 +299,7 @@ def train(args):
             output_dir=output_dir,
             save_total_limit=11,
             load_best_model_at_end=True if args.val_set_size > 0 else False,
-            ddp_find_unused_parameters=False if ddp else None,
-            resume_from_checkpoint=args.resume_from_checkpoint
+            ddp_find_unused_parameters=False if ddp else None
         ),
         data_collator=transformers.DataCollatorForSeq2Seq(tokenizer, return_tensors="pt", padding=True),
     )
@@ -314,7 +313,7 @@ def train(args):
     if torch.__version__ >= "2" and sys.platform != "win32":
         model = torch.compile(model)
 
-    trainer.train()
+    trainer.train(resume_from_checkpoint=True if args.resume_from_checkpoint == 'latest' else args.resume_from_checkpoint)
 
     model.save_pretrained(output_dir)
 
