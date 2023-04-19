@@ -9,6 +9,7 @@ from dataclasses import dataclass, field
 from datasets import load_dataset
 import transformers
 from collections import namedtuple
+from typing import Union, NoneType
 
 assert (
     "LlamaTokenizer" in transformers._import_structure["models.llama"]
